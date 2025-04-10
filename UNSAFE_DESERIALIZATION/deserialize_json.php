@@ -4,7 +4,7 @@ class User {
     public $isAdmin = false;
 }
 
-$json = $_GET['data'] ?? "{}" // Si no se pasa nada como paraemtro data lo interpetara como un fichero
+$json = $_GET['data'] ?? "{}"; // Si no se pasa nada como paraemtro data lo interpetara como un fichero
 
 $data = json_decode($json, true);
 
