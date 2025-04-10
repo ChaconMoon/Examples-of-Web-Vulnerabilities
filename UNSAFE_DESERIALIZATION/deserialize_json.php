@@ -10,12 +10,12 @@ $data = json_decode($json, true);
 
 
 if (!is_array($data)) {
-    die("Formato de datos no valido")
+    die("Formato de datos no valido");
 }
 
 if (isset ($data ["isAdmin"]) & $data("isAdmin") === true) {
-    echo "Acceso de administrador concedido"
+    echo "Acceso de administrador concedido";
 } else {
-    echo "Acceso normal"
+    echo "Acceso normal";
 }
 ?>
