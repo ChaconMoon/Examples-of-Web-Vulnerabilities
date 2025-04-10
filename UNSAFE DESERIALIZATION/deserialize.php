@@ -1,10 +1,8 @@
 <?php
 class User {
-    public $username;
-    public $isAdmin = false;
+    public $username = "hacker";
+    public $isAdmin = true;
 }
 $data = unserialize($_GET['data']);
-if ($data->$isAdmin) {
-    echo "¡Acceso de administrador concedido!"
-}
+echo urldecode(serialize(new User()))
 ?>
