@@ -1,0 +1,23 @@
+.form{
+    padding: 0.1%;
+    padding-left: 1%;
+    background-color: rgb(226, 225, 225);
+    border-radius: 10px;
+    margin-right: 70%;
+
+}
+input{
+margin-left: 4%;
+}
+label{
+margin-left: 2%;
+}
+button{
+margin-left: 25%;
+margin-top: 5%;
+padding-left: 15%;
+padding-right: 15%;
+padding-top: 2% ;
+padding-bottom: 2%;
+border-radius: 5px;
+}
