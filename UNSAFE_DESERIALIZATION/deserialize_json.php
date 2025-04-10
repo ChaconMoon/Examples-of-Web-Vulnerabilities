@@ -13,7 +13,7 @@ if (!is_array($data)) {
     die("Formato de datos no valido");
 }
 
-if (isset ($data ["isAdmin"]) & $data("isAdmin") === true) {
+if (isset ($data ["isAdmin"]) && $data["isAdmin"] === true) {
     echo "Acceso de administrador concedido";
 } else {
     echo "Acceso normal";
