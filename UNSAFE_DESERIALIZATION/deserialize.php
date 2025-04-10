@@ -5,6 +5,6 @@ class User {
 }
 $data = unserialize($_GET['data']);
 if ($data->isAdmin) {
-    echo "¡Acceso de administrador concedido!"
+    echo "¡Acceso de administrador concedido!";
 }
 ?>
