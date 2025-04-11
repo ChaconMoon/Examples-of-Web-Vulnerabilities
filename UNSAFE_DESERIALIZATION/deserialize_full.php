@@ -15,7 +15,7 @@ if (!is_array($data)) {
 
 //Validación extricta de las claves insertadas
 
-$validKeys = ["username", "isAdmin"];
+$validKeys = ['username', 'isAdmin'];
 
 foreach ($data as $key => $value) {
     if (!in_array($key, $validKeys,true)) {
@@ -23,16 +23,16 @@ foreach ($data as $key => $value) {
     }
 }
 
-if (!isset($data["username"]) || is_string($data["username"])) {
+if (!isset($data['username']) || is_string($data['username'])) {
     die("Error: El nombre de usuario debe ser una cadena de texto");
 }
 
-if (!isset($data["isAdmin"]) || is_string($data["isAdmin"])) {
+if (!isset($data['isAdmin']) || is_string($data['isAdmin'])) {
     die("Error: isAdmin debe ser un booleano {true/false}.");
 }
 
 
-if ($data["isAdmin"] === true) {
+if ($data['isAdmin'] === true) {
     echo "Acceso de administrador concedido";
 } else {
     echo "Acceso normal";
