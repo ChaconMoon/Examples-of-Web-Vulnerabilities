@@ -10,5 +10,5 @@ $dom = loadXML(file_get_contents('php://input'), LIBXML_NOENT | LIBXML_DTDLOAD);
 $parsed = socket_import_dom($dom);
 
 # Mostrar el resultado
-echo $parsed
+echo $parsed;
 ?>
