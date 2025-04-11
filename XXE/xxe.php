@@ -7,7 +7,7 @@ $dom = new DOMDocument();
 $dom->loadXML(file_get_contents('php://input'), LIBXML_NOENT | LIBXML_DTDLOAD);
 
 # Convertir el XML a un objeto SimpleXMLElement (opcional)
-$parsed = socket_import_dom($dom);
+$parsed = simplexml_import_dom($dom);
 
 # Mostrar el resultado
 echo $parsed;
