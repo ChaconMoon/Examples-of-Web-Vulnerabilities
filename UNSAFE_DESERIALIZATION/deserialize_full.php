@@ -23,11 +23,11 @@ foreach ($data as $key => $value) {
     }
 }
 
-if (!isset($data['username']) || is_string($data['username'])) {
+if (!isset($data['username']) || !is_string($data['username'])) {
     die("Error: El nombre de usuario debe ser una cadena de texto");
 }
 
-if (!isset($data['isAdmin']) || is_string($data['isAdmin'])) {
+if (!isset($data['isAdmin']) || !is_bool($data['isAdmin'])) {
     die("Error: isAdmin debe ser un booleano {true/false}.");
 }
 
