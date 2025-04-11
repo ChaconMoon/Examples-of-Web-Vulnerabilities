@@ -15,7 +15,7 @@ if (!is_array($data)) {
 
 //Validación extricta de las claves insertadas
 
-$validKeys = ["username". "isAdmin"];
+$validKeys = ["username", "isAdmin"];
 
 foreach ($data as $key => $value) {
     if (!in_array($key, $validKeys,true)) {
