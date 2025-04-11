@@ -8,7 +8,7 @@ $dom = new DOMDocument();
 # Habilitar cargas de contenido externas (no valora entidades externas)
 $dom->loadXML(file_get_contents('php://input'), LIBXML_NOENT | LIBXML_DTDLOAD);
 
-if (strpos(file_get_contents('php//input'), "<!ENTITY") !== false){
+if (strpos(file_get_contents('php://input'), "<!ENTITY") !== false){
     die("No se permiten entidades externas");
 }
 
