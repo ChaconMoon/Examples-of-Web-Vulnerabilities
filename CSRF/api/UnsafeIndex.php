@@ -1,8 +1,18 @@
+<!--
+Script written by Carlos Chacón Molina
+
+Script vulnerable for a CSRF Vulnerability
+-->
 <?php
+/* Processing POST Request*/
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        /* Get The Email input*/
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+
+        /* Delete HTML scpecial characters*/
         $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 
+        /* If the Email is valid shows a text with th new E-Mail.*/
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo "Tu email a sido cambiado a: " . $email;
         } else {
@@ -14,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+        <!--
+        Create the form to change the Email
+        -->
         <div class="form">
         <h4>Cambio de correo electrónico:</h4>
                 <form method="post">

