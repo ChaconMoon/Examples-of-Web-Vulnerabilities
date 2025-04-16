@@ -25,3 +25,9 @@ if ($_SERVER["REQUST_METHOD"] == "POST") {
     }
 }
 ?>
+
+<form method="post">
+    <input type="text" name="username" placeholder="Usuario">
+    <input type="password" name="password" placeholder="Contraseña">
+    <button type="submit">Iniciar Sesion</button>
+</form>
