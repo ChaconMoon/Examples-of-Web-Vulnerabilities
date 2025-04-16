@@ -19,8 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST["password"]);
 
     /* Crate de SQL Query*/
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ? AND
-    password = ?");
+    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
 
@@ -30,8 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Inicio de sesión exitoso<br>";
         /* Show the Query Result */
         while ($row = $result->fetch_assoc()) {
-            echo "ID: " . $row['id'] . " - Usuario: " . $row['username'] . " - Contraseña: "
-            . $row['password'] . "<br>";
+            echo "ID: " . $row['id'] . " - Usuario: " . $row['username'] . " - Contraseña: " . $row['password'] . "<br>";
         }
         } else {
             /* If the user not exists show this text */

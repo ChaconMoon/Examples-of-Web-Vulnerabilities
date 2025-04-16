@@ -8,7 +8,7 @@ if ($_SERVER["REQUST_METHOD"] == "POST") {
     $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     echo = "Consulta ejecutada:" . $query . "<br>";
 
-    $result = $conn->query($query)
+    $result = $conn->query($query);
 
     if ($result) {
         if ($result->num_rows > 0) {
