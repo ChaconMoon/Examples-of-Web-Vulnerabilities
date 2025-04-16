@@ -4,6 +4,8 @@ Script written by Carlos Chacón Molina
 Script securited for a SQL Injection
 -->
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 /* Create a MYSQL Connection*/
 $conn = new mysqli("localhost", "root", "root", "seguridad_db");
 

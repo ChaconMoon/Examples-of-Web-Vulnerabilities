@@ -4,6 +4,8 @@ Script written by Carlos Chacón Molina
 Script securited for a CSRF Vulnerability
 -->
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 /* Session Token creation*/
 session_start();
 if (!isset($_SESSION['csrf_token'])) {

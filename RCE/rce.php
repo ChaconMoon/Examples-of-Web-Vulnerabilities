@@ -4,6 +4,8 @@ Script written by Carlos Chacón Molina
 Script securited for a RCE Vulnerability
 -->
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 /*Array with the allowed commands to execute in the server */
 $allowed_cmds = ["ls", "whoami", "pwd"];
 

@@ -4,6 +4,8 @@ Script written by Carlos Chacón Molina
 Script vulnerable for a CSRF Vulnerability
 -->
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 /* Processing POST Request*/
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
         /* Get The Email input*/
