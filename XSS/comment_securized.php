@@ -12,7 +12,7 @@ if (isset ($_POST['comment'])) {
     }
 }
 ?>
-<from method="post">
+<form method="post">
     <input type="text" name="comment">
     <button type="submit">Enviar</button>
 </form>
