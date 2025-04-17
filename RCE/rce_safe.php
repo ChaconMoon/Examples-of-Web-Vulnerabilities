@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 $allowed_cmds = ["ls", "whoami", "pwd"];
 
 /* If the parameter cmd not exists or isn't in the list finish the execution */
-if (!isset($_GET['cmd'] || !in_array($_GET['cmd'], $allowed_cmds))) {
+if (!isset($_GET['cmd']) || !in_array($_GET['cmd'], $allowed_cmds)) {
 	die("Falta el parametro cmd  o ha insertado un comando no valido");
 }
 
