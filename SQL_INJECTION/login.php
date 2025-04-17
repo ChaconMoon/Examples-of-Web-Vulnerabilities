@@ -14,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result) {
         if ($result->num_rows > 0) {
-            echo "Inicio de sesión exitoso";
+            echo "Inicio de sesión exitoso ";
 
             while ($row = $result->fetch_assoc()) {
-                echo "ID: " . $row['id'] . "Usuario: " . $row['username'] . "Contraseña: " . $row['password'] . "<br>";
+                echo "ID: " . $row['id'] . " Usuario: " . $row['username'] . " Contraseña: " . $row['password'] . "<br>";
             }
         } else {
             echo "Usuario o contraseña incorrecta";

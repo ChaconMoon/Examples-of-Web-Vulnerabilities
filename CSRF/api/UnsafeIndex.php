@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <form method="post">
                 <label for="email">Nuevo Email:</label>
                 <input type="text" size="40" name="email">
-                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <br>
                 <button type="submit">Enviar</button>
                 </form>
