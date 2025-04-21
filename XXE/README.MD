@@ -1,9 +1,9 @@
 # XXE Vulnerablity Example
-A XXE Vulnerabiliy allows the attacker to execute remote code usando the System Entities of a XML Document
+A XXE Vulnerabiliy allows the attacker to execute remote code using the System Entities of a XML Document
 
 ### A XML Entity
 
-A XML Entity is similar to a variable in a programming lenguages allowing to the document to safe and load information in variables, the System Entities read data from the system.
+A XML Entity is similar to a variable in a programming language allowing the document to safe and load information in variables. The System Entities read data from the system.
 
 ```
 <!DOCTYPE foo [
@@ -55,7 +55,7 @@ curl -X POST http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe.php  -H "C
 
 ### Secure Code
 
-To elimite this vulnerability you must stop the execution if the XML contains a Entity
+To eliminate this vulnerability you must stop the execution if the XML contains an Entity
 
 ```
 /* If the XML Document contains entities finish the execution */

@@ -2,7 +2,7 @@
 
 This Repository contains 6 examples of diferent web vulnerabilities, example code with each vulnerability and how secure each one.
 
-### How it works? 
+### How it Works? 
 
 In a Linux system install:
 

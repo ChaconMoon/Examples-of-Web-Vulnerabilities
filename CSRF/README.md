@@ -1,6 +1,6 @@
 # CSRF Vulnerability Example
 
-A CSRF Vulnerability is a attack that uses your login cookie to sent requests to a server in your name for example to change your email of password of your account.
+A CSRF Vulnerability is an attack that uses your login cookie to send requests to a server in your name for example to change your email or password of your account.
 
 ### Vulnerable Website
 
@@ -36,7 +36,7 @@ In this case we have a form to change the email of your account:
 
 ![alt text](./images/CSFR%20Form%20Example.png)
 
-Nevertheless this website not verifes if the post requests was send in this website or other website, a attacker can use this to create a malicius website that replicates this original site and send fake info in the form.
+Nevertheless this website doesn't verify if the post requests were sent to this website or to another, an attacker can use this to create a malicious website that replicates the original site and send fake info in the form.
 
 http://localhost/Examples-of-Web-Vulnerabilities/CSRF/UnsafeFakeForm.html
 
@@ -52,15 +52,15 @@ http://localhost/Examples-of-Web-Vulnerabilities/CSRF/UnsafeFakeForm.html
 </form>
 ```
 
-If you sent any email the real email that will be sent is attacker@deepweb.com
+If you sent an email, the real email that will be sent is attacker@deepweb.com
 
 ![alt text](./images/Change_Email_Attack.png)
 
-# Secure Website
+### Secure Website
 
 http://localhost/Examples-of-Web-Vulnerabilities/CSRF/api/index.php
 
-For prevent that any website can't send a Requests to this form you must creacte a CSRF Token, sent it in the form and before do any changes in the website verife that the token exists.
+For preventing that any website can send a Requests to this form you must creacte a CSRF Token, sending it in the form and before do any changes in the website verify that the token exists.
 
 ```
 <?php

@@ -1,6 +1,6 @@
 # SQL INJECTION Example
 
-This vulnerability consists in get information of the users database using the syntax of the SQL Query.
+This vulnerability consists of get information of the server database using the syntax of the SQL Query.
 
 If you not have the example database create it:
 
@@ -10,7 +10,7 @@ Start MySQL
 sudo systemctl start mysql
 ```
 
-Login in MySQL
+Login into MySQL
 ```
 sudo mysql -u root -p
 ```
@@ -25,10 +25,10 @@ CREATE TABLE users (
 id INT AUTO_INCREMENT PRIMARY KEY,
 username VARCHAR(50) NOT NULL,
 password VARCHAR(100) NOT NULL
+);
 
 INSERT INTO users (username, password) VALUES ('admin', 'admin123'), ('usuario', 'pass123');
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root');
-);
 
 EXIT;
 ```
@@ -37,7 +37,7 @@ EXIT;
 
 http://localhost/Examples-of-Web-Vulnerabilities/SQL_INJECTION/login.php
 
-This example contains a PHP form used to login in this page:
+This example contains a form used to login in this page:
 
 ```
 <form method="post">
@@ -72,7 +72,7 @@ The PHP code process the requests and shows the result:
 
 ![alt text](./images/normal_login.png)
 
- But if you send a condition that always be true you should get the full table of the database.
+ But if you send a condition with is true you should get the full table of the database.
 
  ```
  ' OR '1'='1' #
@@ -95,7 +95,7 @@ http://localhost/Examples-of-Web-Vulnerabilities/SQL_INJECTION/login_securized.p
     $stmt->execute();
 ```
 
-This changes the Query statment to insert 2 stings as params and executes the Query.
+This changes the query statment to insert 2 strings as params and executes the query.
 
 ![alt text](./images/failed_injection_login.png)
 

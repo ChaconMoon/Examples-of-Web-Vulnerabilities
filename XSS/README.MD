@@ -1,6 +1,6 @@
 # XSS Exploit Example
 
-an XSS Vulnerability consist in sent malicuis code to a Website with the aim of infect the server or the user of a website.
+An XSS Vulnerability consists of send malicious code to a Website with the aim of infect the server or the user of a website.
 
 ### Vulnerable code
 
@@ -38,7 +38,7 @@ But if you insert HTML code in this form the browser executes it
 
 http://localhost/Examples-of-Web-Vulnerabilities/XSS/comment_securized.php
 
-If you want to prevent that a malicius attack inject code in your website you can convert the special html character and the browser will no execute the HTML Code
+If you want to prevent that a malicious attack inject code in your website you can convert the special html character and the browser will no execute the HTML Code
 
 ```
 <?php
@@ -61,6 +61,6 @@ if (isset ($_POST['comment'])) {
 </form>
 ```
 
-If you send HTML Code in this form the bowser interprets it as plain text and don't execute the alert.
+If you send HTML Code in this form the bowser interprets it as plain text and doesn't execute the alert.
 
 ![alt text](./images/XSS_alert_securized.png)
