@@ -1,21 +1,21 @@
-# SQL INJECTION Example
+# Ejemplo de una vulnerabilidad de Inyección de SQL
 
-This vulnerability consists of get information of the server database using the syntax of the SQL Query.
+Esta vulnerabilidad consiste en tratar de obtener información de la base de datos gracias a la sintaxis de una consulta SQL
 
-If you not have the example database create it:
+Si no tienes la base de datos de ejemplos:
 
 ### Start Database
-Start MySQL
+Inicia MySQL
 ```
 sudo systemctl start mysql
 ```
 
-Login into MySQL
+Logeate en MySQL
 ```
 sudo mysql -u root -p
 ```
 
-Create the database
+Crea la siguiente base de datos.
 ```
 CREATE DATABASE seguridad_db;
 
@@ -33,11 +33,11 @@ SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root');
 EXIT;
 ```
 
-### Vulnerable code
+### Codigo vulnerable
 
 http://localhost/Examples-of-Web-Vulnerabilities/SQL_INJECTION/login.php
 
-This example contains a form used to login in this page:
+Esta pagina web contiene un formulario que simula iniciar sesión en un sitio web:
 
 ```
 <form method="post">
@@ -47,7 +47,7 @@ This example contains a form used to login in this page:
 </form>
 ```
 
-The PHP code process the requests and shows the result:
+Y este es el codigo PHP que procesa esa petición:
 
 ```
     $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
@@ -72,7 +72,8 @@ The PHP code process the requests and shows the result:
 
 ![alt text](./images/normal_login.png)
 
- But if you send a condition with is true you should get the full table of the database.
+No obstante si enviamos una expresion SQL que siempre sea verdadera obtendremos como resultado todo el listado de usuarios de la base de datos.
+
 
  ```
  ' OR '1'='1' #
@@ -80,7 +81,7 @@ The PHP code process the requests and shows the result:
  
  ![alt text](./images/injection_login.png)
 
-### Secure code
+### Codigo securizado
 
 http://localhost/Examples-of-Web-Vulnerabilities/SQL_INJECTION/login_securized.php
 
@@ -95,7 +96,7 @@ http://localhost/Examples-of-Web-Vulnerabilities/SQL_INJECTION/login_securized.p
     $stmt->execute();
 ```
 
-This changes the query statment to insert 2 strings as params and executes the query.
+Si cambios la consulta SQL para que sea leida como un objeto statsment podremos insertar los parametros sin peligro a que nos inyecten una consulta que muestre todo el listado.
 
 ![alt text](./images/failed_injection_login.png)
 
