@@ -3,7 +3,9 @@
 Una vulnerabilidad CSRF es una vulnerabilidad que permite a un atacante realizar peticiones a un sitio web en tu nombre usando tu cookie de inicio de sesión.
 ### Sitio web vulnerable
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/api/UnsafeIndex.php
+> **Nota:** Si despliegas con Docker Compose, accede mediante el puerto `8080` (`http://localhost:8080/CSRF/...`).
+
+http://localhost:8080/CSRF/api/UnsafeIndex.php
 
 ```
 <?php
@@ -38,7 +40,7 @@ Para este ejemplo tenemos un sitio web que simula cambiar el correo electronico 
 
 No obstante este sitio web no verifica si la petición esta siendo enviada desde este formulario, por lo que se puede crear un sitio web falso que simule ser esta web, si envias cualquier correo desde esta web en su lugar se enviara el correo de un atacante.
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/UnsafeFakeForm.html
+http://localhost:8080/CSRF/UnsafeFakeForm.html
 
 ```
 <form method="post" action="./api/index.php">
@@ -58,7 +60,7 @@ En realidad se ha enviado el correo: attacker@deepweb.com
 
 ### Secure Website
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/api/index.php
+http://localhost:8080/CSRF/api/index.php
 
 Para prevenir que cualquier sitio web pueda hacer peticiones a tu nombre generamos un token CSRF que valida que la petición se ha hecho desde este sitio web.
 
@@ -105,7 +107,7 @@ Y enviamos este token en el formulario.
 
 Si usamos este formulario para hacer una petición al sitio web securizado saltara un error porque no tenemos un token valido.
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/FakeForm.html
+http://localhost:8080/CSRF/FakeForm.html
 
 ![alt text](./images/Fail_Change_Mail_Attack.png)
 

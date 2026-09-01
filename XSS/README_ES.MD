@@ -4,7 +4,7 @@ Una vulnerabilidad XSS consiste en enviar codigo malicioso a traves de un formul
 
 ### Vulnerable code
 
-http://localhost/Examples-of-Web-Vulnerabilities/XSS/comment.php
+http://localhost:8080/XSS/comment.php
 
 Este sitio web muestra el codigo HTML que se le pasa en el formulario.
 
@@ -36,7 +36,7 @@ Pero si insertas codigo HTML en la web esta lo ejecutara.
 
 ### Codigo seguro
 
-http://localhost/Examples-of-Web-Vulnerabilities/XSS/comment_securized.php
+http://localhost:8080/XSS/comment_securized.php
 
 Si quieres prevenir que un atacante inyecte codigo HTML a tu sitio web debes filtrar los caracteres especiales HTML para ejecutarlos como texto plano.
 

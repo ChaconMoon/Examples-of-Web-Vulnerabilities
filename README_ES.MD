@@ -2,9 +2,27 @@
 
 Este repositorio contiene 6 ejemplos de diferentes vulnerabilidades y el un ejemplo de codigo de cada una de ellas al igual que como solventar cada una de ellas.
 
-[English Readme](./README_ES.MD)
+[English Readme](./README.MD)
 
-### How it Works? 
+### Despliegue con Docker (Recomendado)
+
+1. Asegúrate de tener **Docker Desktop** iniciado en tu sistema.
+2. Clona el repositorio y entra en el directorio del proyecto:
+   ```bash
+   git clone https://github.com/ChaconMoon/Examples-of-Web-Vulnerabilities.git
+   cd Examples-of-Web-Vulnerabilities
+   ```
+3. Ejecuta el entorno con Docker Compose:
+   ```bash
+   docker compose up -d
+   ```
+
+4. Para detener y eliminar los contenedores:
+   ```bash
+   docker compose down -v
+   ```
+
+### Despliegue Manual (Sin Docker) 
 
 En un equipo con Linux instala lo siguiente:
 

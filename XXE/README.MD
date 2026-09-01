@@ -14,7 +14,7 @@ A XML Entity is similar to a variable in a programming language allowing the doc
 
 ### Vulnerable Code
 
-http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe.php
+http://localhost:8080/XXE/xxe.php
 
 This code shows the content of the XML Document in the post request
 
@@ -38,18 +38,20 @@ echo $parsed;
 ?>
 ```
 
-To send a file to the website you can use the curl command
+To send a file to the website you can use the curl command. On Windows PowerShell, `@` is treated as a special operator, so use `curl.exe` and quote the file path.
 
-```
-curl -X POST http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe.php  -H "Content-Type: text/xml; charset=UTF-8" --data-binary @safe.xml
+```powershell
+cd "C:\Users\Alumno\Documents\GitHub\Examples-of-Web-Vulnerabilities\XXE"
+curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@safe.xml"
 ```
 
 ![alt text](./images/xxe_safe_example.png)
 
 If you send a XML with System Entities you can get the system files.
 
-```
-curl -X POST http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe.php  -H "Content-Type: text/xml; charset=UTF-8" --data-binary @xxe_payload_passwords.xml
+```powershell
+cd "C:\Users\Alumno\Documents\GitHub\Examples-of-Web-Vulnerabilities\XXE"
+curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
 ![alt text](./images/xxe_passwd.png)
 
@@ -66,8 +68,9 @@ if (strpos(file_get_contents('php://input'), "<!ENTITY") !== false){
 
 Send the Passwd payload
 
-```
-curl -X POST http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe_secured.php  -H "Content-Type: text/xml; charset=UTF-8" --data-binary @xxe_payload_passwords.xml
+```powershell
+cd "C:\Users\Alumno\Documents\GitHub\Examples-of-Web-Vulnerabilities\XXE"
+curl.exe -X POST http://localhost:8080/XXE/xxe_secured.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
 
 ![alt text](./images/fail_xxe_passwd.png)

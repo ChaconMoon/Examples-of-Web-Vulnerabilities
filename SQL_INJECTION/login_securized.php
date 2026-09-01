@@ -7,7 +7,11 @@ Script securited for a SQL Injection
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 /* Create a MYSQL Connection*/
-$conn = new mysqli("localhost", "root", "root", "seguridad_db");
+$db_host = getenv('DB_HOST') ?: 'db';
+$db_user = getenv('DB_USER') ?: 'root';
+$db_pass = getenv('DB_PASSWORD') ?: 'root';
+$db_name = getenv('DB_NAME') ?: 'seguridad_db';
+$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 /* Finish the execution if the connection fail*/
 if ($conn->connect_error) {

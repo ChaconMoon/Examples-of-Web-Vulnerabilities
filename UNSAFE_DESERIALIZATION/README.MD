@@ -3,7 +3,7 @@ An Unsafe Deserialization is a vulnerability that uses PHP Objects to execute co
 
 ### Vulnerable Code
 
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/deserialize_original.php
+http://localhost:8080/UNSAFE_DESERIALIZATION/deserialize_original.php
 
 ```
 <?php
@@ -25,7 +25,7 @@ This script defines an object User with a param "isAdmin" if you put an object u
 
 #### Get Exploit
 
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/eje_desi.php
+http://localhost:8080/UNSAFE_DESERIALIZATION/eje_desi.php
 
 ```
 <?php
@@ -43,14 +43,14 @@ This website generates a serialize object "User" that you can use to login into 
 Put this object in the URL that you use to login into the website.
 
 
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/deserialize_original.php?data=O%3A4%3A"User"%3A2%3A%7Bs%3A8%3A"username"%3Bs%3A6%3A"hacker"%3Bs%3A7%3A"isAdmin"%3Bb%3A1%3B%7D
+http://localhost:8080/UNSAFE_DESERIALIZATION/deserialize_original.php?data=O%3A4%3A"User"%3A2%3A%7Bs%3A8%3A"username"%3Bs%3A6%3A"hacker"%3Bs%3A7%3A"isAdmin"%3Bb%3A1%3B%7D
 
 
 ![alt text](./images/Login%20with%20object.png)
 
 To execute code in the server you can Inject an Exploit class, this class executes the command in the cmd param in the server where the object is destroyed.
 
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/deserialize.php
+http://localhost:8080/UNSAFE_DESERIALIZATION/deserialize.php
 
 ```
 /*Define the Exploit Class */
@@ -67,7 +67,7 @@ class Exploit {
 
 This website generate a exploit that execute the command `pwd`
 
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/exploit.php
+http://localhost:8080/UNSAFE_DESERIALIZATION/exploit.php
 
 ![alt text](./images/Create%20Exploit%20Object.png)
 
@@ -75,7 +75,7 @@ http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/exploit.
 If you put this string in this object in this website you get the result of the `pwd` command
 
 ```
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/deserialize.php?data=O%3A7%3A"Exploit"%3A1%3A%7Bs%3A3%3A"cmd"%3Bs%3A3%3A"pwd"%3B%7D/
+http://localhost:8080/UNSAFE_DESERIALIZATION/deserialize.php?data=O%3A7%3A"Exploit"%3A1%3A%7Bs%3A3%3A"cmd"%3Bs%3A3%3A"pwd"%3B%7D
 ```
 
 ### Secure Code
@@ -109,7 +109,7 @@ if (isset ($data ["isAdmin"]) && $data["isAdmin"] === true) {
 ?>
 ```
 
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/deserialize_json.php?data={"username":"hacker","isAdmin":true}
+http://localhost:8080/UNSAFE_DESERIALIZATION/deserialize_json.php?data={"username":"hacker","isAdmin":true}
 
 This Website returns a login as Admin.
 
@@ -117,6 +117,6 @@ This Website returns a login as Admin.
 
 If you want to create a more secure code you can verify the JSON, if you insert a not valid param in the json the PHP execution stops.
 
-http://localhost/Examples-of-Web-Vulnerabilities/UNSAFE_DESERIALIZATION/deserialize_full.php?data={"isAdmin":true,%20"bypass":"0"}
+http://localhost:8080/UNSAFE_DESERIALIZATION/deserialize_full.php?data={"isAdmin":true,%20"bypass":"0"}
 
 ![alt text](./images/Invalid%20JSON%20Example.png)

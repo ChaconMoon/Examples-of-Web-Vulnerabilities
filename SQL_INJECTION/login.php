@@ -1,7 +1,11 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-$conn = new mysqli("localhost", "root", "root", "seguridad_db");
+$db_host = getenv('DB_HOST') ?: 'db';
+$db_user = getenv('DB_USER') ?: 'root';
+$db_pass = getenv('DB_PASSWORD') ?: 'root';
+$db_name = getenv('DB_NAME') ?: 'seguridad_db';
+$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];

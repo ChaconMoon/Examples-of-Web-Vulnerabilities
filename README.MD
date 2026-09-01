@@ -4,7 +4,24 @@ This Repository contains 6 examples of diferent web vulnerabilities, example cod
 
 [Spanish Readme](./README_ES.MD)
 
-### How it Works? 
+### Docker Deployment (Recommended)
+
+1. Make sure **Docker Desktop** is running on your machine.
+2. Clone the repository and navigate into the project directory:
+   ```bash
+   git clone https://github.com/ChaconMoon/Examples-of-Web-Vulnerabilities.git
+   cd Examples-of-Web-Vulnerabilities
+   ```
+3. Launch the environment using Docker Compose:
+   ```bash
+   docker compose up -d
+   ```
+4. To stop and remove the containers:
+   ```bash
+   docker compose down -v
+   ```
+
+### Manual Deployment (Without Docker) 
 
 In a Linux system install:
 

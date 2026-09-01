@@ -15,7 +15,7 @@ Una entidad XML funciona de forma similar a una variable, permite almacenar cont
 
 ### Codigo vulnerable
 
-http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe.php
+http://localhost:8080/XXE/xxe.php
 
 Este codigo muestra el contenido de un fichero XML que se le pase como parametro.
 
@@ -39,18 +39,18 @@ echo $parsed;
 ?>
 ```
 
-Puedes enviar un fichero al sitio web usando el comando curl.
+Puedes enviar un fichero al sitio web usando el comando curl. En Windows, PowerShell interpreta `@` como operador, así que usa `curl.exe` y pon la ruta del archivo entre comillas.
 
-```
-curl -X POST http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe.php  -H "Content-Type: text/xml; charset=UTF-8" --data-binary @safe.xml
+```powershell
+curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@safe.xml"
 ```
 
 ![alt text](./images/xxe_safe_example.png)
 
 Si envias un fichero XML con entidades SYSTEM puedes acceder a los ficheros del sistema.
 
-```
-curl -X POST http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe.php  -H "Content-Type: text/xml; charset=UTF-8" --data-binary @xxe_payload_passwords.xml
+```powershell
+curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
 ![alt text](./images/xxe_passwd.png)
 
@@ -67,8 +67,8 @@ if (strpos(file_get_contents('php://input'), "<!ENTITY") !== false){
 
 Envia el payload del fichero etc/paswd al script PHP seguro.
 
-```
-curl -X POST http://localhost/Examples-of-Web-Vulnerabilities/XXE/xxe_secured.php  -H "Content-Type: text/xml; charset=UTF-8" --data-binary @xxe_payload_passwords.xml
+```powershell
+curl.exe -X POST http://localhost:8080/XXE/xxe_secured.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
 
 ![alt text](./images/fail_xxe_passwd.png)

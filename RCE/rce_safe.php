@@ -11,10 +11,10 @@ $allowed_cmds = ["ls", "whoami", "pwd"];
 
 /* If the parameter cmd not exists or isn't in the list finish the execution */
 if (!isset($_GET['cmd']) || !in_array($_GET['cmd'], $allowed_cmds)) {
-	die("Falta el parametro cmd  o ha insertado un comando no valido");
+    die("Falta el parametro cmd  o ha insertado un comando no valido");
 }
 
 /* Execute the command in the cmd parameter and shows the output */
 $output = shell_exec(escapeshellarg($_GET['cmd']));
-echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
+echo htmlspecialchars((string) ($output ?? ''), ENT_QUOTES, 'UTF-8');
 ?>

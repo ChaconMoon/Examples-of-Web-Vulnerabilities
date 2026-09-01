@@ -1,0 +1,43 @@
+services:
+  web:
+    build: .
+    container_name: web_vulnerabilities_app
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=seguridad_db
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - vuln-net
+
+  db:
+    image: mariadb:10.6
+    container_name: web_vulnerabilities_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: seguridad_db
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - vuln-net
+
+networks:
+  vuln-net:
+    driver: bridge
+
+volumes:
+  db_data:

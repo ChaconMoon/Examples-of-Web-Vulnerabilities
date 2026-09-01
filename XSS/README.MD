@@ -4,7 +4,7 @@ An XSS Vulnerability consists of send malicious code to a Website with the aim o
 
 ### Vulnerable code
 
-http://localhost/Examples-of-Web-Vulnerabilities/XSS/comment.php
+http://localhost:8080/XSS/comment.php
 
 This website contains a HTML Form what shows the text that you sent with a POST Request.
 
@@ -36,7 +36,7 @@ But if you insert HTML code in this form the browser executes it
 
 ### Secure code
 
-http://localhost/Examples-of-Web-Vulnerabilities/XSS/comment_securized.php
+http://localhost:8080/XSS/comment_securized.php
 
 If you want to prevent that a malicious attack inject code in your website you can convert the special html character and the browser will no execute the HTML Code
 

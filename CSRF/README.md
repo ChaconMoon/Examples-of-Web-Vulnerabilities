@@ -4,7 +4,9 @@ A CSRF Vulnerability is an attack that uses your login cookie to send requests t
 
 ### Vulnerable Website
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/api/UnsafeIndex.php
+> **Note:** If deployed with Docker Compose, use port `8080` (`http://localhost:8080/CSRF/...`).
+
+http://localhost:8080/CSRF/api/UnsafeIndex.php
 
 ```
 <?php
@@ -38,7 +40,7 @@ In this case we have a form to change the email of your account:
 
 Nevertheless this website doesn't verify if the post requests were sent to this website or to another, an attacker can use this to create a malicious website that replicates the original site and send fake info in the form.
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/UnsafeFakeForm.html
+http://localhost:8080/CSRF/UnsafeFakeForm.html
 
 ```
 <form method="post" action="./api/index.php">
@@ -58,7 +60,7 @@ If you sent an email, the real email that will be sent is attacker@deepweb.com
 
 ### Secure Website
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/api/index.php
+http://localhost:8080/CSRF/api/index.php
 
 For preventing that any website can send a Requests to this form you must creacte a CSRF Token, sending it in the form and before do any changes in the website verify that the token exists.
 
@@ -105,7 +107,7 @@ And send this token in the form
 
 Using this form that sent a POST Requests to the secure website you can see that the secure website blocks the requests.
 
-http://localhost/Examples-of-Web-Vulnerabilities/CSRF/FakeForm.html
+http://localhost:8080/CSRF/FakeForm.html
 
 ![alt text](./images/Fail_Change_Mail_Attack.png)
 

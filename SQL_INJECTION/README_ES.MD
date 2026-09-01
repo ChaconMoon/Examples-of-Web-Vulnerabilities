@@ -2,7 +2,9 @@
 
 Esta vulnerabilidad consiste en tratar de obtener información de la base de datos gracias a la sintaxis de una consulta SQL
 
-Si no tienes la base de datos de ejemplos:
+> **Nota:** Si estás utilizando **Docker**, la base de datos `seguridad_db` y sus tablas se inicializan automáticamente al ejecutar `docker compose up -d`.
+
+Si no tienes la base de datos de ejemplos y ejecutas de forma manual:
 
 ### Start Database
 Inicia MySQL
@@ -35,7 +37,7 @@ EXIT;
 
 ### Codigo vulnerable
 
-http://localhost/Examples-of-Web-Vulnerabilities/SQL_INJECTION/login.php
+http://localhost:8080/SQL_INJECTION/login.php
 
 Esta pagina web contiene un formulario que simula iniciar sesión en un sitio web:
 
@@ -83,7 +85,7 @@ No obstante si enviamos una expresion SQL que siempre sea verdadera obtendremos 
 
 ### Codigo securizado
 
-http://localhost/Examples-of-Web-Vulnerabilities/SQL_INJECTION/login_securized.php
+http://localhost:8080/SQL_INJECTION/login_securized.php
 
 ```
 /* Get the statements from the posts*/

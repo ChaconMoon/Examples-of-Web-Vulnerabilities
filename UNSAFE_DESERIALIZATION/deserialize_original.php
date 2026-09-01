@@ -11,9 +11,17 @@ class User {
     public $username;
     public $isAdmin = false;
 }
-/* Show a Text if the User has isAdmin in true*/
 
+if (!isset($_GET['data'])) {
+    die("Falta el parámetro data");
+}
+
+/* Show a Text if the User has isAdmin in true*/
 $data = unserialize($_GET['data']);
+if (!is_object($data) || !isset($data->isAdmin)) {
+    die("Datos no válidos");
+}
+
 if ($data->isAdmin) {
     echo "¡Acceso de administrador concedido!";
 }
