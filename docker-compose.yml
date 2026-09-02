@@ -9,8 +9,6 @@ services:
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_NAME=seguridad_db
-    volumes:
-      - .:/var/www/html
     depends_on:
       db:
         condition: service_healthy
