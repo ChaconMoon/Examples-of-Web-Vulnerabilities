@@ -1,10 +1,16 @@
 # Ejemplo de una vulnerabilidad XXE
 
-Una vulnerabilidad XXE permite al atacante ejecutar comandos en un servidor usando las entidad XML
+Una vulnerabilidad XXE permite al atacante ejecutar comandos en un servidor usando las entidades XML.
+
+**Para probar esta vulnerabilidad debes moverte a la carpeta XXE que es donde están los exploits:**
+
+```bash
+cd ./XXE
+```
 
 ### Las entidades XML
 
-Una entidad XML funciona de forma similar a una variable, permite almacenar contienido para mostrarlo en otra parte del fichero, las entidades tipo SYSTEM permiten acceder a ficheros del sistema.
+Una entidad XML funciona de forma similar a una variable: permite almacenar contenido para mostrarlo en otra parte del fichero. Las entidades tipo SYSTEM permiten acceder a ficheros del sistema.
 
 ```
 <!DOCTYPE foo [
@@ -13,11 +19,11 @@ Una entidad XML funciona de forma similar a una variable, permite almacenar cont
 <foo>&xxe;</foo>
 ```
 
-### Codigo vulnerable
+### Código vulnerable
 
 http://localhost:8080/XXE/xxe.php
 
-Este codigo muestra el contenido de un fichero XML que se le pase como parametro.
+Este código muestra el contenido de un fichero XML que se le pase como parámetro.
 
 ```
 <?php
@@ -39,22 +45,38 @@ echo $parsed;
 ?>
 ```
 
-Puedes enviar un fichero al sitio web usando el comando curl. En Windows, PowerShell interpreta `@` como operador, así que usa `curl.exe` y pon la ruta del archivo entre comillas.
+Puedes enviar un fichero al sitio web usando el comando `curl`.
 
+**Linux / macOS (Bash):**
+```bash
+curl -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@safe.xml"
+```
+
+**Windows (PowerShell / CMD):**
 ```powershell
 curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@safe.xml"
 ```
 
 ![alt text](./images/xxe_safe_example.png)
 
-Si envias un fichero XML con entidades SYSTEM puedes acceder a los ficheros del sistema.
+Si envías un fichero XML con entidades SYSTEM puedes acceder a los ficheros del sistema.
 
+**Linux / macOS (Bash):**
+```bash
+curl -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
+```
+
+**Windows (PowerShell / CMD):**
 ```powershell
 curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
+
+> [!NOTE]
+> Dentro de esta carpeta hay un archivo `xxe_payload_billion.xml` que contiene el código de una vulnerabilidad llamada "un billón de risas" que permite tirar un servidor saturando la memoria RAM con variables con recursividad. No obstante, PHP es capaz de detectar esta vulnerabilidad y bloquearla, por lo que no se puede ejecutar; puedes guardarlo si quieres probarlo en algún servidor antiguo.
+
 ![alt text](./images/xxe_passwd.png)
 
-### Codigo seguro
+### Código seguro
 
 Para eliminar esta vulnerabilidad lo ideal sería prohibir la ejecución de ficheros XML con entidades.
 
@@ -65,11 +87,16 @@ if (strpos(file_get_contents('php://input'), "<!ENTITY") !== false){
 }
 ```
 
-Envia el payload del fichero etc/paswd al script PHP seguro.
+Envía el payload del fichero etc/passwd al script PHP seguro.
 
+**Linux / macOS (Bash):**
+```bash
+curl -X POST http://localhost:8080/XXE/xxe_secured.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
+```
+
+**Windows (PowerShell / CMD):**
 ```powershell
 curl.exe -X POST http://localhost:8080/XXE/xxe_secured.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
 
 ![alt text](./images/fail_xxe_passwd.png)
-

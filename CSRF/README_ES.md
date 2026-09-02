@@ -1,9 +1,8 @@
 # Ejemplo de la vulnerabilidad CSRF
 
-Una vulnerabilidad CSRF es una vulnerabilidad que permite a un atacante realizar peticiones a un sitio web en tu nombre usando tu cookie de inicio de sesión.
-### Sitio web vulnerable
+Una vulnerabilidad CSRF permite a un atacante realizar peticiones a un sitio web en tu nombre usando tu cookie de inicio de sesión.
 
-> **Nota:** Si despliegas con Docker Compose, accede mediante el puerto `8080` (`http://localhost:8080/CSRF/...`).
+### Sitio web vulnerable
 
 http://localhost:8080/CSRF/api/UnsafeIndex.php
 
@@ -34,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 </form>
 ```
 
-Para este ejemplo tenemos un sitio web que simula cambiar el correo electronico de una cuenta:
+Para este ejemplo tenemos un sitio web que simula cambiar el correo electrónico de una cuenta:
 
 ![alt text](./images/CSFR%20Form%20Example.png)
 
-No obstante este sitio web no verifica si la petición esta siendo enviada desde este formulario, por lo que se puede crear un sitio web falso que simule ser esta web, si envias cualquier correo desde esta web en su lugar se enviara el correo de un atacante.
+No obstante, este sitio web no verifica si la petición está siendo enviada desde este formulario, por lo que se puede crear un sitio web falso que simule ser esta web. Si envías cualquier correo desde esta web, en su lugar se enviará el correo de un atacante.
 
 http://localhost:8080/CSRF/UnsafeFakeForm.html
 
@@ -58,11 +57,11 @@ En realidad se ha enviado el correo: attacker@deepweb.com
 
 ![alt text](./images/Change_Email_Attack.png)
 
-### Secure Website
+### Sitio web seguro
 
 http://localhost:8080/CSRF/api/index.php
 
-Para prevenir que cualquier sitio web pueda hacer peticiones a tu nombre generamos un token CSRF que valida que la petición se ha hecho desde este sitio web.
+Para prevenir que cualquier sitio web pueda hacer peticiones a tu nombre, generamos un token CSRF que valida que la petición se ha hecho desde este sitio web.
 
 ```
 <?php
@@ -105,10 +104,8 @@ Y enviamos este token en el formulario.
 </form>
 ```
 
-Si usamos este formulario para hacer una petición al sitio web securizado saltara un error porque no tenemos un token valido.
+Si usamos este formulario para hacer una petición al sitio web protegido saltará un error porque no tenemos un token válido.
 
 http://localhost:8080/CSRF/FakeForm.html
 
 ![alt text](./images/Fail_Change_Mail_Attack.png)
-
-

@@ -1,9 +1,16 @@
-# XXE Vulnerablity Example
-A XXE Vulnerabiliy allows the attacker to execute remote code using the System Entities of a XML Document
+# Example of XXE Vulnerability
 
-### A XML Entity
+An XXE vulnerability allows an attacker to execute commands on a server using XML entities.
 
-A XML Entity is similar to a variable in a programming language allowing the document to safe and load information in variables. The System Entities read data from the system.
+**To test this vulnerability you must navigate to the XXE directory where the exploits are located:**
+
+```bash
+cd ./XXE
+```
+
+### XML Entities
+
+An XML entity works similarly to a variable: it allows storing content to display it in another part of the file. SYSTEM type entities allow accessing system files.
 
 ```
 <!DOCTYPE foo [
@@ -16,7 +23,7 @@ A XML Entity is similar to a variable in a programming language allowing the doc
 
 http://localhost:8080/XXE/xxe.php
 
-This code shows the content of the XML Document in the post request
+This code displays the content of an XML file passed to it as a parameter.
 
 ```
 <?php
@@ -38,26 +45,40 @@ echo $parsed;
 ?>
 ```
 
-To send a file to the website you can use the curl command. On Windows PowerShell, `@` is treated as a special operator, so use `curl.exe` and quote the file path.
+You can send a file to the website using the `curl` command.
 
+**Linux / macOS (Bash):**
+```bash
+curl -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@safe.xml"
+```
+
+**Windows (PowerShell / CMD):**
 ```powershell
-cd "C:\Users\Alumno\Documents\GitHub\Examples-of-Web-Vulnerabilities\XXE"
 curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@safe.xml"
 ```
 
 ![alt text](./images/xxe_safe_example.png)
 
-If you send a XML with System Entities you can get the system files.
+If you send an XML file with SYSTEM entities you can access system files.
 
+**Linux / macOS (Bash):**
+```bash
+curl -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
+```
+
+**Windows (PowerShell / CMD):**
 ```powershell
-cd "C:\Users\Alumno\Documents\GitHub\Examples-of-Web-Vulnerabilities\XXE"
 curl.exe -X POST http://localhost:8080/XXE/xxe.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
+
+> [!NOTE]
+> Inside this folder there is an `xxe_payload_billion.xml` file containing the payload of a vulnerability called "Billion Laughs" which crashes a server by saturating RAM memory with recursive variables. However, PHP is capable of detecting and blocking this vulnerability, so it cannot be executed; you can save it if you want to test on an older server.
+
 ![alt text](./images/xxe_passwd.png)
 
 ### Secure Code
 
-To eliminate this vulnerability you must stop the execution if the XML contains an Entity
+To eliminate this vulnerability, the ideal approach is to prohibit executing XML files containing entities.
 
 ```
 /* If the XML Document contains entities finish the execution */
@@ -66,12 +87,16 @@ if (strpos(file_get_contents('php://input'), "<!ENTITY") !== false){
 }
 ```
 
-Send the Passwd payload
+Send the payload from the etc/passwd file to the secure PHP script.
 
+**Linux / macOS (Bash):**
+```bash
+curl -X POST http://localhost:8080/XXE/xxe_secured.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
+```
+
+**Windows (PowerShell / CMD):**
 ```powershell
-cd "C:\Users\Alumno\Documents\GitHub\Examples-of-Web-Vulnerabilities\XXE"
 curl.exe -X POST http://localhost:8080/XXE/xxe_secured.php -H "Content-Type: text/xml; charset=UTF-8" --data-binary "@xxe_payload_passwords.xml"
 ```
 
 ![alt text](./images/fail_xxe_passwd.png)
-

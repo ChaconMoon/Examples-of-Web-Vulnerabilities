@@ -1,12 +1,12 @@
-# XSS Exploit Example
+# Example of XSS Vulnerability
 
-An XSS Vulnerability consists of send malicious code to a Website with the aim of infect the server or the user of a website.
+An XSS vulnerability consists of sending malicious code through an input form.
 
-### Vulnerable code
+### Vulnerable Code
 
 http://localhost:8080/XSS/comment.php
 
-This website contains a HTML Form what shows the text that you sent with a POST Request.
+This website displays the HTML code submitted in the form.
 
 ```
 <?php
@@ -22,11 +22,11 @@ if (isset ($_POST['comment'])) {
 </form>
 ```
 
-If you send a simple text the website shows it.
+Submitting plain text renders normally:
 
 ![alt text](./images/example_use.png)
 
-But if you insert HTML code in this form the browser executes it
+However, inserting HTML/script tags causes the application to execute them:
 
 ```
 <script>alert('XSS ejecutado!')</script>
@@ -34,11 +34,11 @@ But if you insert HTML code in this form the browser executes it
 
 ![alt text](./images/XSS_alert.png)
 
-### Secure code
+### Secure Code
 
 http://localhost:8080/XSS/comment_securized.php
 
-If you want to prevent that a malicious attack inject code in your website you can convert the special html character and the browser will no execute the HTML Code
+To prevent attackers from injecting HTML code into your website, HTML special characters must be encoded to treat input strictly as plain text.
 
 ```
 <?php
@@ -61,6 +61,6 @@ if (isset ($_POST['comment'])) {
 </form>
 ```
 
-If you send HTML Code in this form the bowser interprets it as plain text and doesn't execute the alert.
+Submitting the script payload again causes the browser to safely display it as plain text.
 
 ![alt text](./images/XSS_alert_securized.png)

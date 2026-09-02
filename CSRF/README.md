@@ -1,10 +1,8 @@
-# CSRF Vulnerability Example
+# Example of CSRF Vulnerability
 
-A CSRF Vulnerability is an attack that uses your login cookie to send requests to a server in your name for example to change your email or password of your account.
+A CSRF vulnerability allows an attacker to make requests to a website on your behalf using your session cookie.
 
 ### Vulnerable Website
-
-> **Note:** If deployed with Docker Compose, use port `8080` (`http://localhost:8080/CSRF/...`).
 
 http://localhost:8080/CSRF/api/UnsafeIndex.php
 
@@ -25,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 ?>
 ```
+
 ```
 <form method="post">
     <label for="email">Nuevo Email:</label>
@@ -34,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 </form>
 ```
 
-In this case we have a form to change the email of your account:
+For this example, we have a website that simulates changing an account's email address:
 
 ![alt text](./images/CSFR%20Form%20Example.png)
 
-Nevertheless this website doesn't verify if the post requests were sent to this website or to another, an attacker can use this to create a malicious website that replicates the original site and send fake info in the form.
+However, this website does not verify if the request is being sent from this form, so a fake website mimicking this one can be created. If you send any email from that fake site, the attacker's email will be sent instead.
 
 http://localhost:8080/CSRF/UnsafeFakeForm.html
 
@@ -54,7 +53,7 @@ http://localhost:8080/CSRF/UnsafeFakeForm.html
 </form>
 ```
 
-If you sent an email, the real email that will be sent is attacker@deepweb.com
+In reality, the email sent was: attacker@deepweb.com
 
 ![alt text](./images/Change_Email_Attack.png)
 
@@ -62,7 +61,7 @@ If you sent an email, the real email that will be sent is attacker@deepweb.com
 
 http://localhost:8080/CSRF/api/index.php
 
-For preventing that any website can send a Requests to this form you must creacte a CSRF Token, sending it in the form and before do any changes in the website verify that the token exists.
+To prevent any website from making requests on your behalf, we generate a CSRF token that validates that the request was made from this website.
 
 ```
 <?php
@@ -93,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 ?>
 ```
 
-And send this token in the form
+And we include this token in the form.
 
 ```
 <form method="post">
@@ -105,10 +104,8 @@ And send this token in the form
 </form>
 ```
 
-Using this form that sent a POST Requests to the secure website you can see that the secure website blocks the requests.
+If we use this form to make a request to the protected website, an error will be raised because we don't have a valid token.
 
 http://localhost:8080/CSRF/FakeForm.html
 
 ![alt text](./images/Fail_Change_Mail_Attack.png)
-
-

